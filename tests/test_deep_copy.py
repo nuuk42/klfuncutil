@@ -1,6 +1,6 @@
 import logging
 from unittest import TestCase, main
-from  klfuncutil import collection
+from klfuncutil.collection import *
 
 
 class MyList(list):

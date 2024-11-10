@@ -1,7 +1,7 @@
 import logging
 from unittest import TestCase, main
-from  klfuncutil import collection
 from collections import OrderedDict
+from klfuncutil.collection import *
 
 
 class TestDict(TestCase):
@@ -22,35 +22,35 @@ class TestDict(TestCase):
         self.assertNotEqual(self.input_id, id(self.result))
 
     def test_append_number_tuple(self):
-        self.result = fktutl.append_element(self.input, ("x", 9))
+        self.result = append_element(self.input, ("x", 9))
         self.assertEqual(self.result, {"a": 1, "b": 2, "c": 3, "x": 9})
 
     def test_append_number_list(self):
-        self.result = fktutl.append_element(self.input, ["x", 9])
+        self.result = append_element(self.input, ["x", 9])
         self.assertEqual(self.result, {"a": 1, "b": 2, "c": 3, "x": 9})
 
     def test_append_number_iter(self):
-        self.result = fktutl.append_element(self.input, iter(["x", 9]))
+        self.result = append_element(self.input, iter(["x", 9]))
         self.assertEqual(self.result, {"a": 1, "b": 2, "c": 3, "x": 9})
 
     def test_ordered_dict(self):
         d1 = OrderedDict(self.input)
-        self.result = fktutl.append_element(d1, ["x", 9])
+        self.result = append_element(d1, ["x", 9])
         self.assertEqual(type(self.result), OrderedDict)
 
     def test_append_dict(self):
-        self.result = fktutl.append_collection(self.input, {"x": 9, 1: "a"})
+        self.result = append_collection(self.input, {"x": 9, 1: "a"})
         self.assertEqual(self.result, {"a": 1, "b": 2, "c": 3, "x": 9, 1: "a"})
 
     def test_append_list(self):
-        self.result = fktutl.append_collection(self.input, [("x", 9), (1, "a")])
+        self.result = append_collection(self.input, [("x", 9), (1, "a")])
         self.assertEqual(self.result, {"a": 1, "b": 2, "c": 3, "x": 9, 1: "a"})
 
     def test_append_tuple(self):
-        self.result = fktutl.append_collection(self.input, (["x", 9], (1, "a")))
+        self.result = append_collection(self.input, (["x", 9], (1, "a")))
 
     def test_append_iter(self):
-        self.result = fktutl.append_collection(
+        self.result = append_collection(
             self.input, iter({"x": 9, 1: "a"}.items())
         )
         self.assertEqual(self.result, {"a": 1, "b": 2, "c": 3, "x": 9, 1: "a"})

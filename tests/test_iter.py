@@ -1,7 +1,7 @@
 import logging
 from unittest import TestCase, main
-import fktutl
 import itertools
+from klfuncutil.collection import *
 
 
 class TestIter(TestCase):
@@ -34,32 +34,32 @@ class TestIter(TestCase):
         self.assertNotEqual(self.input_id, id(self.result))
 
     def test_append_number(self):
-        self.result = fktutl.append_element(self.input, 4)
+        self.result = append_element(self.input, 4)
         self.append_element = 4
 
     def test_append_string(self):
-        self.result = fktutl.append_element(self.input, "Kalle")
+        self.result = append_element(self.input, "Kalle")
         self.append_element = "Kalle"
 
     def test_append_num_list(self):
-        self.result = fktutl.append_collection(self.input, [100, 200, 300])
+        self.result = append_collection(self.input, [100, 200, 300])
         self.append_collection = [100, 200, 300]
 
     def test_append_str_list(self):
-        self.result = fktutl.append_collection(self.input, "Kalle")
+        self.result = append_collection(self.input, "Kalle")
         self.append_collection = ["K", "a", "l", "l", "e"]
 
     def test_append_num_iter(self):
-        self.result = fktutl.append_collection(
+        self.result = append_collection(
             self.input, filter(lambda x: x != 400, [100, 200, 300, 400])
         )
         self.append_collection = [100, 200, 300]
 
     def test_remove_element(self):
-        self.result = fktutl.append_element(self.input, 4)
+        self.result = append_element(self.input, 4)
         self.append_element = 4
         i1 = iter([1, 2, 3])
-        i2 = fktutl.remove_element(i1, 2)
+        i2 = remove_element(i1, 2)
         l2 = list(i2)
         self.assertEqual(l2, [1, 3])
 

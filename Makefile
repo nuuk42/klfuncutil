@@ -1,7 +1,7 @@
 # shell
 SHELL = /bin/bash
-HOME =  /home/nikita/py/fktutl
-PROJECTNAME =klfuncutil
+HOME =  /home/nikita/work/github/klfktutil
+PROJECTNAME =klfktutil
 TARGETDIR = ./src/$(PROJECTNAME)
 TESTDIR = ./tests
 PY = source $(HOME)/runtime/bin/activate&&python
