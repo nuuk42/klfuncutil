@@ -1,4 +1,6 @@
 from functools import wraps
+
+
 def restartable(iter_returing_function):
     """Annoation to create re-startable iterators
 
@@ -46,4 +48,3 @@ def restartable(iter_returing_function):
         return iter_obj
 
     return _wrapper
-

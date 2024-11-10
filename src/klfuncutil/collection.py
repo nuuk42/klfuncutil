@@ -181,5 +181,3 @@ def deep_copy(c):
     """
     pickled_obj = pickle.dumps(c)
     return pickle.loads(pickled_obj)
-
-

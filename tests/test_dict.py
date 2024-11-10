@@ -50,9 +50,7 @@ class TestDict(TestCase):
         self.result = append_collection(self.input, (["x", 9], (1, "a")))
 
     def test_append_iter(self):
-        self.result = append_collection(
-            self.input, iter({"x": 9, 1: "a"}.items())
-        )
+        self.result = append_collection(self.input, iter({"x": 9, 1: "a"}.items()))
         self.assertEqual(self.result, {"a": 1, "b": 2, "c": 3, "x": 9, 1: "a"})
 
 
