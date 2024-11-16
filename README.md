@@ -1,2 +1,2 @@
-# klfktutil
+# klfuncutil
 Functional Programming Utilities

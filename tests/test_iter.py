@@ -2,6 +2,7 @@ import logging
 from unittest import TestCase, main
 import itertools
 from klfuncutil.collection import *
+from klfuncutil.iterator import *
 
 
 class TestIter(TestCase):
@@ -13,6 +14,8 @@ class TestIter(TestCase):
         self.input_id = id(self.input)
 
     def tearDown(self):
+        if self.result==None:
+            return
         # make sure the the input-iter contains the same elements as the result
         for x in self.input_copy:
             y = next(self.result)
@@ -62,6 +65,48 @@ class TestIter(TestCase):
         i2 = remove_element(i1, 2)
         l2 = list(i2)
         self.assertEqual(l2, [1, 3])
+
+    def test_none_restartable(self):
+        def get_iter(r):
+            for x in r:
+                yield x
+
+        i0 = get_iter([1,2,])
+        next(i0)
+        next(i0)
+        try:
+            next(i0)
+            self.assertTrue(False)
+        except StopIteration as ex:
+            pass
+
+        try:
+            d = next(i0)
+            self.assertTrue(False)
+        except StopIteration as ex:
+            pass
+
+
+    def test_restartable(self):
+        @restartable
+        def get_iter(r):
+            for x in r:
+                yield x
+
+        i0 = get_iter([1,2,])
+        next(i0)
+        next(i0)
+        try:
+            next(i0)
+            self.assertTrue(False)
+        except StopIteration as ex:
+            pass
+
+        try:
+            d = next(i0)
+            self.assertEqual(d,1)
+        except StopIteration as ex:
+            self.assertTrue(False)
 
 
 if __name__ == "__main__":

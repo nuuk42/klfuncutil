@@ -40,11 +40,32 @@ def restartable(iter_returing_function):
         class _Iter_Wrapper:
             def __init__(self, iter_fkt):
                 self.iter_fkt = iter_fkt
+                self.nxt_iter = None
 
             def __iter__(self):
                 return self.iter_fkt(*args, **kwargs)
+
+            def __next__(self):
+                if self.nxt_iter == None:
+                    self.nxt_iter = self.__iter__()
+                try:
+                    result = next(self.nxt_iter)
+                    return result
+                except StopIteration as ex:
+                    self.nxt_iter = None
+                    raise
 
         iter_obj = _Iter_Wrapper(iter_returing_function)
         return iter_obj
 
     return _wrapper
+
+"""
+class Restartable_Iterator(iter_returing_function):
+    def __init__(self, iter_fkt):
+        self.iter_fkt = iter_fkt
+
+    def __iter__(self):
+        iter_obj 0
+   o pass
+"""
