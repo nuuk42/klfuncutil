@@ -37,6 +37,14 @@ def restartable(iter_returing_function):
 
     @wraps(iter_returing_function)
     def _wrapper(*args, **kwargs):
+        """The function to wrapp the iterator generator
+
+        Parameter:
+        *args: positional arguments for the iter_returing_function()
+        **kwargs: keyword argument for the iter_returing_function()
+        return: an object of the (internal) class _Iter_Wrapper
+        """
+
         class _Iter_Wrapper:
             def __init__(self, iter_fkt):
                 self.iter_fkt = iter_fkt
@@ -55,10 +63,18 @@ def restartable(iter_returing_function):
                     self.nxt_iter = None
                     raise
 
+        # the function will return an instance of our
+        # internal class instead of the iterator that
+        # the wrapped function would produce
+        # If the client now uses the returned object in
+        # a loop, the __iter__() function of the class
+        # is called an returns the iterator.
         iter_obj = _Iter_Wrapper(iter_returing_function)
         return iter_obj
 
+    # return the function that has been wrapped
     return _wrapper
+
 
 """
 class Restartable_Iterator(iter_returing_function):

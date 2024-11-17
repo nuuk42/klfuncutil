@@ -3,6 +3,7 @@ from unittest import TestCase, main
 import itertools
 from klfuncutil.collection import *
 from klfuncutil.iterator import *
+import csv
 
 
 class TestIter(TestCase):
@@ -14,7 +15,7 @@ class TestIter(TestCase):
         self.input_id = id(self.input)
 
     def tearDown(self):
-        if self.result==None:
+        if self.result == None:
             return
         # make sure the the input-iter contains the same elements as the result
         for x in self.input_copy:
@@ -66,12 +67,17 @@ class TestIter(TestCase):
         l2 = list(i2)
         self.assertEqual(l2, [1, 3])
 
-    def test_none_restartable(self):
+    def test_iter_next_none_restartable(self):
         def get_iter(r):
             for x in r:
                 yield x
 
-        i0 = get_iter([1,2,])
+        i0 = get_iter(
+            [
+                1,
+                2,
+            ]
+        )
         next(i0)
         next(i0)
         try:
@@ -86,14 +92,18 @@ class TestIter(TestCase):
         except StopIteration as ex:
             pass
 
-
-    def test_restartable(self):
+    def test_iter_next_restartable(self):
         @restartable
         def get_iter(r):
             for x in r:
                 yield x
 
-        i0 = get_iter([1,2,])
+        i0 = get_iter(
+            [
+                1,
+                2,
+            ]
+        )
         next(i0)
         next(i0)
         try:
@@ -104,9 +114,24 @@ class TestIter(TestCase):
 
         try:
             d = next(i0)
-            self.assertEqual(d,1)
+            self.assertEqual(d, 1)
         except StopIteration as ex:
             self.assertTrue(False)
+
+    def test_csv_iter(self):
+
+        @restartable
+        def get_reader(csv_file):
+            csv_file.seek(0)
+            reader = csv.reader(csv_file, delimiter=";")
+            return reader
+
+        with open("./tests/test_iter.csv", newline="") as csv_file:
+            reader = get_reader(csv_file)
+            l1 = list(reader)
+            l2 = list(reader)
+        self.assertEqual(len(l1), 5)
+        self.assertEqual(len(l2), 5)
 
 
 if __name__ == "__main__":
