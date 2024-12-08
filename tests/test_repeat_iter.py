@@ -57,7 +57,7 @@ class TestRepeatIter(TestCase):
         self.assertEqual(len(name_list_2), 4)
 
     def test_decorator(self):
-        @restartable
+        @restartable_t
         def iter_fkt(data):
             return iter(data)
 
@@ -70,7 +70,7 @@ class TestRepeatIter(TestCase):
 
     def test_decorator_filter(self):
 
-        @restartable
+        @restartable_t
         def iter_fkt(data):
             """Liefert den Iterator
 
@@ -107,7 +107,7 @@ class TestRepeatIter(TestCase):
         assert list(i1) == [1, 2, 3]
         assert list(i1) == []
 
-        @restartable
+        @restartable_t
         def get_some_iter2():
             return iter([1, 2, 3])
 
@@ -116,7 +116,7 @@ class TestRepeatIter(TestCase):
         assert list(i2) == [1, 2, 3]
 
     def test_sum_list(self):
-        @restartable
+        @restartable_t
         def sum_list(number_list):
             """An iterator
             return number_list[0] -> number_list[0]+number_list[1] -> ...
@@ -132,7 +132,7 @@ class TestRepeatIter(TestCase):
         self.assertEqual(l1, l2)
 
     def test_fitler_iter(self):
-        @restartable
+        @restartable_t
         def filter_a(some_test):
             return filter(lambda some_char: some_char.upper() != "A", some_test)
 

@@ -3,6 +3,8 @@ runtime
 __pycache__/
 *.py[cod]
 *$py.class
+.python_history-45874.tmp
+.python_history
 
 # C extensions
 *.so
