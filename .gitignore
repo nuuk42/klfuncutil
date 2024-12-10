@@ -5,7 +5,6 @@ __pycache__/
 *$py.class
 .python_history-45874.tmp
 .python_history
-.pypirc
 
 # C extensions
 *.so
