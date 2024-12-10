@@ -1,8 +1,10 @@
 """Iterator utilities
 This is the help for ...
 """
+
 from functools import wraps
 from itertools import tee
+
 
 def restartable_t(iter_returing_function):
     """Annoation to create re-startable iterators
@@ -14,7 +16,7 @@ def restartable_t(iter_returing_function):
     the "iterator" interfact in such a way the
     iterator can be execute multible times.
 
-    This decorator is an alternative to using 
+    This decorator is an alternative to using
     itertools.tee(). It consumes less memory,
     but we need to re-load the data each time the
     iterator is re-started - so it "lives" on
@@ -138,13 +140,12 @@ def restartable_m(iter_returing_function):
                 self.source_iter = None
 
             def __iter__(self):
-                """Requrst a new iterator.
-                """
+                """Requrst a new iterator."""
                 if self.source_iter == None:
                     self.source_iter = self.iter_fkt(*args, **kwargs)
                 # we duplicate the iterator an keep one copy
                 self.source_iter, ret_val = tee(self.source_iter)
-                return ret_val 
+                return ret_val
 
         # the function will return an instance of our
         # internal class instead of the iterator that
@@ -157,4 +158,3 @@ def restartable_m(iter_returing_function):
 
     # return the function that has been wrapped
     return _wrapper
-

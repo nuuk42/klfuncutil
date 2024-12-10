@@ -142,36 +142,36 @@ class TestIter(TestCase):
 
         @restartable_t
         def filter_firstname(string_in_firstname, csv_iter):
-            return filter(lambda line: line[1].find(string_in_firstname)>=0, csv_iter)
+            return filter(lambda line: line[1].find(string_in_firstname) >= 0, csv_iter)
 
         with open("./tests/test_iter.csv", newline="") as csv_file:
             reader = get_reader(csv_file)
-            filter_by_l_iter = filter_firstname('l',reader)
+            filter_by_l_iter = filter_firstname("l", reader)
             l1 = list(filter_by_l_iter)
-            self.assertEqual( len(l1), 3)
+            self.assertEqual(len(l1), 3)
 
             # the iterator "filter_iter" has been used by the list()
             # function, but we can re-start it...
-            filter_by_K_and_l = filter_firstname('K', filter_by_l_iter)
+            filter_by_K_and_l = filter_firstname("K", filter_by_l_iter)
             l2 = list(filter_by_K_and_l)
-            self.assertEqual( len(l2), 1)
-             
+            self.assertEqual(len(l2), 1)
 
     def test_repeatable_m(self):
 
         @restartable_m
         def get_list_iter():
-            print('iter created')
-            for x in range(0,10):
+            print("iter created")
+            for x in range(0, 10):
                 yield x
-       
+
         i1 = get_list_iter()
         for x in i1:
             print(x)
         for x in i1:
             print(x)
- 
-        pass  
+
+        pass
+
 
 if __name__ == "__main__":
     logging.basicConfig(filename="tests.log", level=logging.DEBUG)

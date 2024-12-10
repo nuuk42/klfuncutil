@@ -4,16 +4,20 @@ HOME =  /home/nikita/work/github/klfuncutil
 PROJECTNAME =klfuncutil
 TARGETDIR = ./src/$(PROJECTNAME)
 TESTDIR = ./tests
-PY = source $(HOME)/runtime/bin/activate&&python
-BLACK = source $(HOME)/runtime/bin/activate&&black
+SETUPENV =source $(HOME)/runtime/bin/activate
+PY = $(SETUPENV)&&python
+BLACK = $(SETUPENV)&&black
+FLIT = $(SETUPENV)&&flit
 
 help:
 	@echo Usage
 	@echo -----
-	@echo test_all
-	@echo test_list
-	@echo black
-	@echo py - Python prompt
+	@echo make test_all
+	@echo make test_list
+	@echo make black
+	@echo make py - Python prompt
+	@echo make install - install package klfuncutil locally
+	@echo make publish - publish a new version on pypi
 
 # open Python prompt
 py: runtime
@@ -32,3 +36,14 @@ test_%:
 runtime:
 	python3 -m venv runtime
 	source runtime/bin/activate&&pip install -r requirements.txt
+
+install: runtime
+	$(FLIT) install
+
+.PHONY: build
+build: runtime
+	$(FLIT) build
+
+publish: runtime
+	$(FLIT) build
+	$(FLIT) publish
