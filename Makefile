@@ -22,10 +22,10 @@ help:
 # open Python prompt
 py: runtime
 	$(PY)
+
 black: runtime
 	cd $(TARGETDIR)/&&$(BLACK) *.py
 	cd tests/&&$(BLACK) *.py
-
 
 test_all: runtime test_list test_tuple test_dict test_iter test_deep_copy test_repeat_iter
 	@echo done
@@ -37,13 +37,13 @@ runtime:
 	python3 -m venv runtime
 	source runtime/bin/activate&&pip install -r requirements.txt
 
-install: runtime
+install: runtime black
 	$(FLIT) install
 
 .PHONY: build
 build: runtime
 	$(FLIT) build
 
-publish: runtime
+publish: runtime black
 	$(FLIT) build
 	$(FLIT) publish
