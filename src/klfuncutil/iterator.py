@@ -1,4 +1,6 @@
 """Iterator utilities
+$Id$
+
 This is the help for ...
 """
 
