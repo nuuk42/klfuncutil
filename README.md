@@ -111,3 +111,6 @@ The output is:
 ## Repro
 https://github.com/nuuk42/klfuncutil.git
 
+## Installation
+Use: pip install klfuncutil
+
