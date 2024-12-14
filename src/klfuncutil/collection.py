@@ -1,3 +1,6 @@
+"""Package Collection
+$Id$
+"""
 from functools import reduce
 from itertools import chain
 import pickle
