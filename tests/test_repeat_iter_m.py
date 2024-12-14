@@ -3,6 +3,7 @@ from unittest import TestCase, main
 import itertools
 import sys
 from klfuncutil.iterator import *
+from klfuncutil.collection import *
 
 
 class TestRepeatIter(TestCase):
@@ -57,7 +58,7 @@ class TestRepeatIter(TestCase):
         self.assertEqual(len(name_list_2), 4)
 
     def test_decorator(self):
-        @restartable_t
+        @restartable_m
         def iter_fkt(data):
             return iter(data)
 
@@ -70,7 +71,7 @@ class TestRepeatIter(TestCase):
 
     def test_decorator_filter(self):
 
-        @restartable_t
+        @restartable_m
         def iter_fkt(data):
             """Liefert den Iterator
 
@@ -107,7 +108,7 @@ class TestRepeatIter(TestCase):
         assert list(i1) == [1, 2, 3]
         assert list(i1) == []
 
-        @restartable_t
+        @restartable_m
         def get_some_iter2():
             return iter([1, 2, 3])
 
@@ -116,7 +117,7 @@ class TestRepeatIter(TestCase):
         assert list(i2) == [1, 2, 3]
 
     def test_sum_list(self):
-        @restartable_t
+        @restartable_m
         def sum_list(number_list):
             """An iterator
             return number_list[0] -> number_list[0]+number_list[1] -> ...
@@ -131,14 +132,26 @@ class TestRepeatIter(TestCase):
         l2 = list(sum_iter)
         self.assertEqual(l1, l2)
 
-    def test_fitler_iter(self):
-        @restartable_t
+    def test_filter_iter(self):
+        @restartable_m
         def filter_a(some_test):
             return filter(lambda some_char: some_char.upper() != "A", some_test)
 
         name_iter = filter_a("Kalle Anderson")
         n1 = "".join(name_iter)
         n2 = "".join(name_iter)
+        self.assertEqual(n1, n2)
+
+    def test_iter_remove_element(self):
+        @restartable_m
+        def get_names():
+            for x in ('Kalle','Pelle','Olle','Nisse'):
+                yield x
+
+        name_iter = get_names()
+        name_no_Kalle_iter = remove_element(name_iter,'Kalle') 
+        n1 = "".join(name_no_Kalle_iter)
+        n2 = "".join(name_no_Kalle_iter)
         self.assertEqual(n1, n2)
 
 

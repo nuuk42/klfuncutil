@@ -27,7 +27,7 @@ black: runtime
 	cd $(TARGETDIR)/&&$(BLACK) *.py
 	cd tests/&&$(BLACK) *.py
 
-test_all: runtime test_list test_tuple test_dict test_iter test_deep_copy test_repeat_iter
+test_all: runtime test_list test_tuple test_dict test_iter test_deep_copy test_repeat_iter_t test_repeat_iter_m
 	@echo done
 
 test_%:
