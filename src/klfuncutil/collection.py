@@ -161,7 +161,7 @@ def remove_element(c, element):
     c - any collection
     element - element to be removed
 
-    If "c" is list, we return a new list object
+    If "c" is a list, we return a new list object
     If "c" is a tuple, we return a new tuble
     If "c" is a dict, we return a new dict
     If "c" is an iterator, we return a new iterator

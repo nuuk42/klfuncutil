@@ -55,10 +55,10 @@ def restartable_t(iter_returing_function):
         Parameter:
         *args: positional arguments for the iter_returing_function()
         **kwargs: keyword argument for the iter_returing_function()
-        return: an object of the (internal) class _Iter_Wrapper
+        return: an object of the (internal) class _Iter_Wrapper_t
         """
 
-        class _Iter_Wrapper:
+        class _Iter_Wrapper_t:
             def __init__(self, iter_fkt):
                 self.iter_fkt = iter_fkt
                 self.nxt_iter = None
@@ -82,7 +82,7 @@ def restartable_t(iter_returing_function):
         # If the client now uses the returned object in
         # a loop, the __iter__() function of the class
         # is called an returns the iterator.
-        iter_obj = _Iter_Wrapper(iter_returing_function)
+        iter_obj = _Iter_Wrapper_t(iter_returing_function)
         return iter_obj
 
     # return the function that has been wrapped
@@ -133,10 +133,10 @@ def restartable_m(iter_returing_function):
         Parameter:
         *args: positional arguments for the iter_returing_function()
         **kwargs: keyword argument for the iter_returing_function()
-        return: an object of the (internal) class _Iter_Wrapper
+        return: an object of the (internal) class _Iter_Wrapper_m
         """
 
-        class _Iter_Wrapper:
+        class _Iter_Wrapper_m:
             def __init__(self, iter_fkt):
                 self.iter_fkt = iter_fkt
                 self.source_iter = None
@@ -155,7 +155,7 @@ def restartable_m(iter_returing_function):
         # If the client now uses the returned object in
         # a loop, the __iter__() function of the class
         # is called an returns the iterator.
-        iter_obj = _Iter_Wrapper(iter_returing_function)
+        iter_obj = _Iter_Wrapper_m(iter_returing_function)
         return iter_obj
 
     # return the function that has been wrapped
