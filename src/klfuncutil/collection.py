@@ -1,6 +1,7 @@
 """Package Collection
 $Id$
 """
+
 from functools import reduce
 from itertools import chain
 import pickle
@@ -111,6 +112,7 @@ def _remove_element_from_iter_t(source_iter, element):
     """
     return filter(lambda x: x != element, source_iter)
 
+
 @restartable_m
 def _remove_element_from_iter_t(source_iter, element):
     """
@@ -118,6 +120,7 @@ def _remove_element_from_iter_t(source_iter, element):
     but we can 'filter' it from the result
     """
     return filter(lambda x: x != element, source_iter)
+
 
 def _remove_element_from_iter(source_iter, element):
     """
@@ -189,9 +192,9 @@ def remove_element(c, element):
         return _remove_element_from_tuple(c, element)
     if issubclass(type(c), dict):
         return _remove_element_from_dict(c, element)
-    if c.__class__.__name__ == '_Iter_Wrapper_t':
+    if c.__class__.__name__ == "_Iter_Wrapper_t":
         return _remove_element_from_iter_t(c, element)
-    if c.__class__.__name__ == '_Iter_Wrapper_m':
+    if c.__class__.__name__ == "_Iter_Wrapper_m":
         return _remove_element_from_iter_t(c, element)
     if callable(getattr(c, "__next__")):
         return _remove_element_from_iter(c, element)

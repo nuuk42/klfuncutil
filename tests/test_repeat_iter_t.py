@@ -145,11 +145,11 @@ class TestRepeatIter(TestCase):
     def test_iter_remove_element(self):
         @restartable_t
         def get_names():
-            for x in ('Kalle','Pelle','Olle','Nisse'):
+            for x in ("Kalle", "Pelle", "Olle", "Nisse"):
                 yield x
 
         name_iter = get_names()
-        name_no_Kalle_iter = remove_element(name_iter,'Kalle') 
+        name_no_Kalle_iter = remove_element(name_iter, "Kalle")
         n1 = "".join(name_no_Kalle_iter)
         n2 = "".join(name_no_Kalle_iter)
         self.assertEqual(n1, n2)

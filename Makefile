@@ -27,12 +27,21 @@ black: runtime
 	cd $(TARGETDIR)/&&$(BLACK) *.py
 	cd tests/&&$(BLACK) *.py
 
-test_all: runtime test_list test_tuple test_dict test_iter test_deep_copy test_repeat_iter_t test_repeat_iter_m
+# --------------------------------------------------------
+
+.PHONY testenv:
+testenv: build
+	-rm -Rf testenv
+	python3 -m venv testenv
+	source ./testenv/bin/activate&&pip install ./dist/klfuncutil-1.0.2-py2.py3-none-any.whl
+
+test_all: testenv test_list test_tuple test_dict test_iter test_deep_copy test_repeat_iter_t test_repeat_iter_m
 	@echo done
 
 test_%:
-	export PYTHONPATH=$(HOME)/src&&$(PY) ./$(TESTDIR)/$@.py
+	source ./testenv/bin/activate&&python ./$(TESTDIR)/$@.py
 
+# --------------------------------------------------------
 runtime:
 	python3 -m venv runtime
 	source runtime/bin/activate&&pip install -r requirements.txt
