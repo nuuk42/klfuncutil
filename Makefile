@@ -1,4 +1,4 @@
-# shell
+# shell - 
 SHELL = /bin/bash
 HOME =  /home/nikita/work/github/klfuncutil
 PROJECTNAME =klfuncutil
