@@ -35,7 +35,7 @@ testenv: build
 	python3 -m venv testenv
 	source ./testenv/bin/activate&&pip install ./dist/klfuncutil-1.0.2-py2.py3-none-any.whl
 
-test_all: testenv test_list test_tuple test_dict test_iter test_deep_copy test_repeat_iter_t test_repeat_iter_m
+test_all: testenv test_list test_tuple test_dict test_iter test_deep_copy test_repeat_iter_t test_repeat_iter_m test_tuplefactory
 	@echo done
 
 test_%:
@@ -49,9 +49,11 @@ runtime:
 install: runtime black
 	$(FLIT) install
 
-.PHONY: build
+.PHONY: build dist
 build: runtime
 	$(FLIT) build
+
+dist: build
 
 publish: runtime black
 	$(FLIT) build
