@@ -122,3 +122,39 @@ Die Ausgabe ist:
         20
 ```
 
+## Repro
+https://github.com/nuuk42/klfuncutil.git
+
+Verwenden: git clone https://github.com/nuuk42/klfuncutil.git && cd klfuncutil
+Der Standardbranch ist `main`; `git` muss installiert sein.
+
+## Installation
+
+Voraussetzungen
+* Python 3.6 oder neuer als `python3` im `PATH` (im Quellcode werden f-strings verwendet; das Build-Backend `flit_core >=3.12` benötigt Python 3.6+)
+* `pip` (im virtuellen Environment enthalten)
+* Betriebssystem: beliebig für die Installation des veröffentlichten Pakets
+
+Verwenden: pip install klfuncutil
+
+## Einrichtung für die lokale Entwicklung
+
+Zusätzliche Voraussetzungen
+* Python 3.9 oder neuer für die in `requirements.txt` festgelegten Entwicklungs-Werkzeuge (beispielsweise benötigt `Flask==3.1.0` Python `>=3.9`)
+* GNU `make`
+* Linux oder ein anderes POSIX-System mit `bash` unter `/bin/bash` (das Makefile setzt `SHELL = /bin/bash` und verwendet `source`)
+* `python3 -m venv` (unter Debian/Ubuntu ggf. das Paket `python3-venv` installieren)
+* Netzwerkzugriff zum Herunterladen der Build-Werkzeuge
+
+Befehl:
+    make runtime
+Damit wird `runtime/` angelegt oder aktualisiert – das virtuelle Environment mit allen Abhängigkeiten. Ein erneuter Aufruf installiert die Abhängigkeiten neu und installiert dieses Projekt im Editable-Modus; `runtime/` muss nicht vorher gelöscht werden.
+
+Befehl:
+    make
+Damit werden alle verfügbaren Kommandos angezeigt.
+
+Mit `make test_all` wird das Paket gebaut und gegen die in `src/klfuncutil/__init__.py` deklarierte Version getestet.
+
+Für `make publish` werden PyPI-Zugangsdaten benötigt: `FLIT_USERNAME=__token__` und `FLIT_PASSWORD` mit dem PyPI-Token setzen oder ein Passwort in einer lokalen `.pypirc` hinterlegen. Das Token nicht in die Versionsverwaltung einchecken.
+

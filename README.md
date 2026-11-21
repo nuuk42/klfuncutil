@@ -111,8 +111,40 @@ The output is:
 ## Repro
 https://github.com/nuuk42/klfuncutil.git
 
+Use: git clone https://github.com/nuuk42/klfuncutil.git && cd klfuncutil
+The default branch is `main`; `git` must be installed.
+
 ## Installation
+
+Prerequisites
+* Python 3.6 or newer on `PATH` as `python3` (f-strings are used in the source; the build backend `flit_core >=3.12` requires Python 3.6+)
+* `pip` (included in the virtual environment)
+* Operating system: any for installing the published package
+
 Use: pip install klfuncutil
+
+## Local Development Setup
+
+Additional prerequisites
+* Python 3.9 or newer for the pinned development tools in `requirements.txt` (for example `Flask==3.1.0` requires Python `>=3.9`)
+* GNU `make`
+* Linux or another POSIX system with `bash` at `/bin/bash` (the Makefile sets `SHELL = /bin/bash` and uses `source`)
+* `python3 -m venv` (on Debian/Ubuntu install the `python3-venv` package if needed)
+* Network access to download build tools
+
+Use the command
+    make runtime
+to create or refresh `runtime/`, the virtual environment with all dependencies. Re-running it reinstalls the dependencies and installs this checkout in editable mode; there is no need to delete `runtime/` first.
+
+Use the command
+    make
+to list all available commands.
+
+Run `make test_all` to build the package and run the tests against the version declared in `src/klfuncutil/__init__.py`.
+
+Publishing with `make publish` requires PyPI credentials: set `FLIT_USERNAME=__token__` and `FLIT_PASSWORD` to your PyPI token, or configure a password in a local `.pypirc`. Do not commit the token.
+
+
 
 ## History
 
